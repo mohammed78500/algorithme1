@@ -1,0 +1,38 @@
+VARIABLES
+  argent EST UN REEL ET EST > 0
+  prix EST UN REEL ET EST > 0
+  max_bonbons EST UN ENTIER NATUREL <- 0
+    
+DEBUT CalculMaxBonbons (REEL argent)
+
+  DEBUT SI argent < 0
+    AFFICHER ("Tu ne peux pas acheter quoique ce soit avec un solde négatif! Vérifie bien les valeurs saisies et soumets à nouveau le formulaire.")
+    ARRET DU SCRIPT
+
+  SINON SI prix < 0
+    AFFICHER ("Le prix unitaire d'un bonbon ne peut en aucun cas être négatif! Vérifie bien les valeurs saisies et soumets à nouveau le formulaire.")
+    ARRET DU SCRIPT
+  
+  SINON SI argent > 0 ET prix > 0
+    argent_restant <- argent - max_bonbons * prix
+    
+    DEBUT TANT QUE argent_restant >= prix
+      max_bonbons <- max_bonbons + 1
+      argent_restant <- argent_restant - max_bonbons * prix
+    FIN TANT QUE
+    
+    DEBUT SI max_bonbons = 1
+      AFFICHER ("Tu peux acheter un seul et unique bonbon avec ton solde de ", argent, "€.")
+      AFFICHER ("Il te restera ", argent_restant, "€.")
+      ARRET DU SCRIPT
+    
+    SINON SI max_bonbons > 1
+      AFFICHER ("Tu peux acheter au maximum ", max_bonbons, " bonbons avec ton solde de ", argent, "€.")
+      AFFICHER ("Il te restera ", argent_restant, "€.")
+      ARRET DU SCRIPT
+    
+    SINON SI max_bonbons = 0
+      AFFICHER ("Tu ne peux malheureusement pas acheter de bonbons avec l'argent dont tu disposes! Va demander à tes parents un peu d'argent de poche pour augmenter ton solde ;-)"
+      ARRET DU SCRIPT
+    
+    FIN SI
